@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+        
+    
+    <context:property-placeholder location="classpath:application.properties"/>
+
+        
+   <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="location" value="classpath:application.properties"/>
+        </bean>  
+   --> 
+        
+	<bean id="Address" class="CollectionDependencyInjection.Address">
+		<property name="city" value="${Address.city}"></property>
+		<property name="country" value="${Address.country}"></property>
+	</bean>  
+	
+	<bean id="Course1" class="CollectionDependencyInjection.Course">
+		<property name="courseId" value="${Course1.courseId}"></property>
+		<property name="courseName" value="${Course2.courseName}"></property>
+		<property name="subjects">
+			<list>
+				<value>${Course1.subjects}</value>
+			</list>
+		</property>
+	</bean> 
+	
+	<bean id="Course2" class="CollectionDependencyInjection.Course">
+		<property name="courseId" value="${Course2.courseId}"></property>
+		<property name="courseName" value="${Course2.courseName}"></property>
+		<property name="subjects">
+			<list>
+				<value>${Course2.subjects}</value>
+			</list>
+		</property>
+	</bean> 
+	
+	<bean id="Student" class="CollectionDependencyInjection.Student">
+		<property name="name" value="${Student.name}"></property>
+		<property name="address" ref="Address"></property>
+		<property name="courses">
+			<list>
+				<ref bean="Course1"/>
+				<ref bean="Course2"/>
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="Exam" class="CollectionDependencyInjection.Exam">
+	    <property name="subject" value="JAVA"></property>
+	    <property name="marks" value="88"></property>
+	</bean>
+	
+	<bean id="ExamManager" class="CollectionDependencyInjection.ExamManager">
+	    <property name="studentExams">
+	        <map>
+	            <entry key-ref="Student" value-ref="Exam"></entry>
+	        </map>
+	    </property>
+	</bean>      
+</beans> 
+
+
+<!--<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  
+    <bean id="Address" class="CollectionDependencyInjection.Address">
+        <constructor-arg value="Bangalore"/>
+        <constructor-arg value="India"/>
+    </bean>
+
+  
+    <bean id="Course1" class="CollectionDependencyInjection.Course">
+        <constructor-arg value="1"/>
+        <constructor-arg value="MCA"/>
+        <constructor-arg>
+            <list>
+                <value>JAVA</value>
+                <value>PYTHON</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="Course2" class="CollectionDependencyInjection.Course">
+        <constructor-arg value="1"/>
+        <constructor-arg value="BTECH"/>
+        <constructor-arg>
+            <list>
+                <value>SQL</value> 
+                <value>JAVA</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    
+    <bean id="Student" class="CollectionDependencyInjection.Student">
+        <constructor-arg value="Raj"/>
+        <constructor-arg ref="Address"/>
+        <constructor-arg>
+            <list>
+                <ref bean="Course1"/>
+                <ref bean="Course2"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="Exam" class="CollectionDependencyInjection.Exam">
+		<constructor-arg value="JAVA"></constructor-arg>
+		<constructor-arg value="88"></constructor-arg>
+	</bean>
+	
+	<bean id="ExamManager" class="CollectionDependencyInjection.ExamManager">
+		<constructor-arg>
+			<map>
+				<entry key-ref="Student" value-ref="Exam"></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+</beans> -->

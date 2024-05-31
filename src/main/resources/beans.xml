@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+   <!--<bean id="Airtel" class="com.example.demo.Airtel" ></bean> 
+   <bean scope="prototype" id="Airtel" class="com.example.demo.Airtel" ></bean>
+   <bean id="vphone" class="com.example.demo.VodaPhone" ></bean> -->
+   
+   <bean id="sim" class="com.example.demo.Ioc.Airtel" ></bean>
+   <!--<bean id="sim" class="com.example.demo.Ioc.VodaPhone" ></bean>-->
+   
+  
+</beans>
